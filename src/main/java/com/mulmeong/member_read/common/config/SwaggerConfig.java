@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @OpenAPIDefinition(
-        info = @Info(title = "ㅇㅇ 도메인 API", version = "v1",
-                description = "ㅇㅇ 도메인의 기능 나열 서비스",
+        info = @Info(title = "회원 조회용 API", version = "v1",
+                description = "회원 관련 조회용 서비스",
                 termsOfService = "http://swagger.io/terms/")
 
 )
@@ -35,19 +35,13 @@ public class SwaggerConfig {
                         .type(SecurityScheme.Type.HTTP)
                         .scheme(BEARER_TOKEN_PREFIX)
                         .bearerFormat(securityJwtName));
-                // Member-Uuid 커스텀 헤더 추가
-//                .addSecuritySchemes(securityMemberUuid, new SecurityScheme()
-//                        .name(securityMemberUuid)
-//                        .type(SecurityScheme.Type.APIKEY)  // APIKEY 타입으로 설정하여 헤더로 추가
-//                        .in(SecurityScheme.In.HEADER)
-//                        .description("사용자의 멤버 UUID를 포함하는 헤더"));
 
         return new OpenAPI()
                 .addSecurityItem(securityRequirement)
                 .components(components)
                 // Swagger에서 요청보낼때 API에 추가되는 문자열
-                .addServersItem(new Server().url("/ㅇㅇ-service"));
-                //.addServersItem(new Server().url("/"));
+                .addServersItem(new Server().url("/member-read-service"));
+        //.addServersItem(new Server().url("/"));
     }
 
 }
