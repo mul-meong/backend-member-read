@@ -1,7 +1,7 @@
-package com.mulmeong.member_read.common.exception;
+package com.mulmeong.member.read.common.exception;
 
-import com.mulmeong.member_read.common.response.BaseResponse;
-import com.mulmeong.member_read.common.response.BaseResponseStatus;
+import com.mulmeong.member.read.common.response.BaseResponse;
+import com.mulmeong.member.read.common.response.BaseResponseStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
