@@ -13,7 +13,7 @@ public class CommonJsonDeserializer {
     /**
      * Kafka 컨슈머 설정을 생성하는 메서드.(오류 처리와 메시지 역직렬화 설정 등)
      * TRUSTED_PACKAGES는 보안을 위해 지정된 클래스만 역직렬화하도록 설정하며,
-     * Producer의 DTO 클래스 패키지와 같은 패키지를 지정해야 합니다.
+     * Producer의 Event 클래스(dto) 패키지와 같은 패키지를 지정해야 합니다.
      *
      * @param bootstrapServer Kafka 서버 주소 (쉼표로 구분된 리스트)
      * @param groupId Kafka 컨슈머 그룹 ID

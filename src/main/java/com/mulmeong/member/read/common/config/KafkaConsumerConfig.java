@@ -1,8 +1,8 @@
 package com.mulmeong.member.read.common.config;
 
-import com.mulmeong.event.member.MemberCreateDto;
-import com.mulmeong.event.member.MemberNicknameUpdateDto;
-import com.mulmeong.event.member.MemberProfileImgUpdateDto;
+import com.mulmeong.event.member.MemberCreateEvent;
+import com.mulmeong.event.member.MemberNicknameUpdateEvent;
+import com.mulmeong.event.member.MemberProfileImgUpdateEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,43 +42,46 @@ public class KafkaConsumerConfig {
 
     /* 회원가입 후 이벤트 리스너 */
     @Bean
-    public ConsumerFactory<String, MemberCreateDto> memberCreateDtoConsumerFactory() {
+    public ConsumerFactory<String, MemberCreateEvent> memberCreateEventConsumerFactory() {
 
         return new DefaultKafkaConsumerFactory<>(readConsumerConfigs());
     }
+
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, MemberCreateDto> memberCreateDtoListener() {
-        ConcurrentKafkaListenerContainerFactory<String, MemberCreateDto> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, MemberCreateEvent> memberCreateEventListener() {
+        ConcurrentKafkaListenerContainerFactory<String, MemberCreateEvent> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(memberCreateDtoConsumerFactory());
+        factory.setConsumerFactory(memberCreateEventConsumerFactory());
         return factory;
     }
 
     /* 닉네임 수정 후 이벤트 리스너 */
     @Bean
-    public ConsumerFactory<String, MemberNicknameUpdateDto> nicknameUpdateDtoConsumerFactory() {
+    public ConsumerFactory<String, MemberNicknameUpdateEvent> nicknameUpdateEventConsumerFactory() {
 
         return new DefaultKafkaConsumerFactory<>(readConsumerConfigs());
     }
+
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, MemberNicknameUpdateDto> nicknameUpdateDtoListener() {
-        ConcurrentKafkaListenerContainerFactory<String, MemberNicknameUpdateDto> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, MemberNicknameUpdateEvent> nicknameUpdateEventListener() {
+        ConcurrentKafkaListenerContainerFactory<String, MemberNicknameUpdateEvent> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(nicknameUpdateDtoConsumerFactory());
+        factory.setConsumerFactory(nicknameUpdateEventConsumerFactory());
         return factory;
     }
 
     /* 프로필사진 수정 후 이벤트 리스너 */
     @Bean
-    public ConsumerFactory<String, MemberProfileImgUpdateDto> profileUpdateDtoConsumerFactory() {
+    public ConsumerFactory<String, MemberProfileImgUpdateEvent> profileUpdateEventConsumerFactory() {
 
         return new DefaultKafkaConsumerFactory<>(readConsumerConfigs());
     }
+
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, MemberProfileImgUpdateDto> profileUpdateDtoListener() {
-        ConcurrentKafkaListenerContainerFactory<String, MemberProfileImgUpdateDto> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, MemberProfileImgUpdateEvent> profileUpdateEventListener() {
+        ConcurrentKafkaListenerContainerFactory<String, MemberProfileImgUpdateEvent> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(profileUpdateDtoConsumerFactory());
+        factory.setConsumerFactory(profileUpdateEventConsumerFactory());
         return factory;
     }
 }

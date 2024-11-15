@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 @NoArgsConstructor
-public class MemberNicknameUpdateDto {
+public class MemberNicknameUpdateEvent {
     private String memberUuid;
     private String nickname;
 }

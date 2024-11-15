@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 @NoArgsConstructor
-public class MemberProfileImgUpdateDto {
+public class MemberProfileImgUpdateEvent {
     private String memberUuid;
     private String profileImgUrl;
 }

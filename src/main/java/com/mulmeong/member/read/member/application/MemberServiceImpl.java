@@ -1,8 +1,8 @@
 package com.mulmeong.member.read.member.application;
 
-import com.mulmeong.event.member.MemberCreateDto;
-import com.mulmeong.event.member.MemberNicknameUpdateDto;
-import com.mulmeong.event.member.MemberProfileImgUpdateDto;
+import com.mulmeong.event.member.MemberCreateEvent;
+import com.mulmeong.event.member.MemberNicknameUpdateEvent;
+import com.mulmeong.event.member.MemberProfileImgUpdateEvent;
 import com.mulmeong.member.read.member.document.Member;
 import com.mulmeong.member.read.member.infrastructure.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,34 +22,35 @@ public class MemberServiceImpl implements MemberService {
     /**
      * 회원 Read DB 생성.
      *
-     * @param dto 회원 생성 DTO
+     * @param event 회원 생성 Event
      */
     @Override
-    public void createMember(MemberCreateDto dto) {
+    public void createMember(MemberCreateEvent event) {
 
-        memberRepository.save(dto.toEntity());
+        memberRepository.save(event.toEntity());
     }
 
     /**
      * 회원 Read DB의 닉네임 수정.
      *
-     * @param dto 닉네임 수정 DTO
+     * @param event 닉네임 수정 Event
      */
     @Override
-    public void updateNickname(MemberNicknameUpdateDto dto) {
-        Query query = new Query(Criteria.where("memberUuid").is(dto.getMemberUuid()));
-        Update update = new Update().set("nickname", dto.getNickname());
+    public void updateNickname(MemberNicknameUpdateEvent event) {
+        Query query = new Query(Criteria.where("memberUuid").is(event.getMemberUuid()));
+        Update update = new Update().set("nickname", event.getNickname());
 
         mongoTemplate.updateFirst(query, update, Member.class);
     }
 
     /**
      * 회원 Read DB의 프로필 이미지 수정.
-     * @param dto 프로필 이미지 수정 DTO
+     *
+     * @param event 프로필 이미지 수정 Event.
      */
-    public void updateProfileImage(MemberProfileImgUpdateDto dto) {
-        Query query = new Query(Criteria.where("memberUuid").is(dto.getMemberUuid()));
-        Update update = new Update().set("profileImageUrl", dto.getProfileImgUrl());
+    public void updateProfileImage(MemberProfileImgUpdateEvent event) {
+        Query query = new Query(Criteria.where("memberUuid").is(event.getMemberUuid()));
+        Update update = new Update().set("profileImageUrl", event.getProfileImgUrl());
 
         mongoTemplate.updateFirst(query, update, Member.class);
     }

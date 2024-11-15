@@ -1,8 +1,8 @@
 package com.mulmeong.member.read.member.kafka;
 
-import com.mulmeong.event.member.MemberCreateDto;
-import com.mulmeong.event.member.MemberNicknameUpdateDto;
-import com.mulmeong.event.member.MemberProfileImgUpdateDto;
+import com.mulmeong.event.member.MemberCreateEvent;
+import com.mulmeong.event.member.MemberNicknameUpdateEvent;
+import com.mulmeong.event.member.MemberProfileImgUpdateEvent;
 import com.mulmeong.member.read.member.application.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,22 +17,22 @@ public class KafkaConsumer {
     private final MemberService memberService;
 
     @KafkaListener(topics = "member-created", groupId = "member-read",
-            containerFactory = "memberCreateDtoListener")
-    public void handleMemberCreatedEvent(MemberCreateDto event) {
+            containerFactory = "memberCreateEventListener")
+    public void handleMemberCreatedEvent(MemberCreateEvent event) {
         log.info("MemberCreatedEvent Consume : {}", event);
         memberService.createMember(event);
     }
 
     @KafkaListener(topics = "nickname-updated", groupId = "member-read",
-            containerFactory = "nicknameUpdateDtoListener")
-    public void handleNicknameUpdatedEvent(MemberNicknameUpdateDto event) {
+            containerFactory = "nicknameUpdateEventListener")
+    public void handleNicknameUpdatedEvent(MemberNicknameUpdateEvent event) {
         log.info("NicknameUpdatedEvent Consume : {}", event);
         memberService.updateNickname(event);
     }
 
     @KafkaListener(topics = "profile-img-updated", groupId = "member-read",
-            containerFactory = "profileImgUpdateDtoListener")
-    public void handleProfileImgUpdatedEvent(MemberProfileImgUpdateDto event) {
+            containerFactory = "profileUpdateEventListener")
+    public void handleProfileImgUpdatedEvent(MemberProfileImgUpdateEvent event) {
         log.info("ProfileImgUpdatedEvent Consume : {}", event);
         memberService.updateProfileImage(event);
     }

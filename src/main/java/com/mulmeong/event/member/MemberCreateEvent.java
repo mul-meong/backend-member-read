@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberCreateDto {
+public class MemberCreateEvent {
     private String memberUuid;
     private String nickname;
     private String profileImageUrl;

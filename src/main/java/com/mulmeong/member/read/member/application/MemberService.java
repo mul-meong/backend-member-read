@@ -1,15 +1,15 @@
 package com.mulmeong.member.read.member.application;
 
-import com.mulmeong.event.member.MemberCreateDto;
-import com.mulmeong.event.member.MemberNicknameUpdateDto;
-import com.mulmeong.event.member.MemberProfileImgUpdateDto;
+import com.mulmeong.event.member.MemberCreateEvent;
+import com.mulmeong.event.member.MemberNicknameUpdateEvent;
+import com.mulmeong.event.member.MemberProfileImgUpdateEvent;
 
 public interface MemberService {
 
-    void createMember(MemberCreateDto memberCreateDto);
+    void createMember(MemberCreateEvent memberCreateEvent);
 
-    void updateNickname(MemberNicknameUpdateDto memberNicknameUpdateDto);
+    void updateNickname(MemberNicknameUpdateEvent memberNicknameUpdateEvent);
 
-    void updateProfileImage(MemberProfileImgUpdateDto memberProfileImgUpdateDto);
+    void updateProfileImage(MemberProfileImgUpdateEvent memberProfileImgUpdateEvent);
 
 }
