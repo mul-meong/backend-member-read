@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @OpenAPIDefinition(
-        info = @Info(title = "회원 조회용 API", version = "v1",
+        info = @Info(title = "회원 Read Only API", version = "v1",
                 description = "회원 관련 조회용 서비스",
                 termsOfService = "http://swagger.io/terms/")
 
@@ -40,8 +40,8 @@ public class SwaggerConfig {
                 .addSecurityItem(securityRequirement)
                 .components(components)
                 // Swagger에서 요청보낼때 API에 추가되는 문자열
-                .addServersItem(new Server().url("/member-read-service"));
-        //.addServersItem(new Server().url("/"));
+//                .addServersItem(new Server().url("/member-read-service"));
+                .addServersItem(new Server().url("/"));
     }
 
 }
