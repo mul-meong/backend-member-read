@@ -19,21 +19,18 @@ public class KafkaConsumer {
     @KafkaListener(topics = "member-created", groupId = "member-read",
             containerFactory = "memberCreateEventListener")
     public void handleMemberCreatedEvent(MemberCreateEvent event) {
-        log.info("MemberCreatedEvent Consume : {}", event);
         memberService.createMember(event);
     }
 
     @KafkaListener(topics = "nickname-updated", groupId = "member-read",
             containerFactory = "nicknameUpdateEventListener")
     public void handleNicknameUpdatedEvent(MemberNicknameUpdateEvent event) {
-        log.info("NicknameUpdatedEvent Consume : {}", event);
         memberService.updateNickname(event);
     }
 
     @KafkaListener(topics = "profile-img-updated", groupId = "member-read",
             containerFactory = "profileUpdateEventListener")
     public void handleProfileImgUpdatedEvent(MemberProfileImgUpdateEvent event) {
-        log.info("ProfileImgUpdatedEvent Consume : {}", event);
         memberService.updateProfileImage(event);
     }
 }

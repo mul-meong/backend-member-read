@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface MemberRepository extends MongoRepository<Member, String> {
 
-    Optional<Member> findByMemberUuid(String memberUuid);
+    Optional<Member> findByNickname(String nickname);
 }
