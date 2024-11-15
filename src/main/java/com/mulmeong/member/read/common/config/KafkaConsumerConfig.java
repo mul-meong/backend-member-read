@@ -1,4 +1,4 @@
-package com.mulmeong.member.read.member.kafka;
+package com.mulmeong.member.read.common.config;
 
 import com.mulmeong.event.member.MemberCreateDto;
 import com.mulmeong.event.member.NicknameUpdateDto;
@@ -12,6 +12,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
 import java.util.Map;
 
+
 @EnableKafka
 @Configuration
 public class KafkaConsumerConfig {
@@ -22,10 +23,21 @@ public class KafkaConsumerConfig {
     @Value("${spring.kafka.consumer.group-id}")
     private String groupId;
 
+    /**
+     * {@link CommonJsonDeserializer} 에서 JSON 데이터를 역직렬화하는 설정을 가져옵니다.
+     *
+     * @return Kafka 컨슈머 설정을 포함하는 Map
+     */
     @Bean
     public Map<String, Object> readConsumerConfigs() {
         return CommonJsonDeserializer.getStringObjectMap(bootstrapServers, groupId);
     }
+
+    /**
+     * 아래 내용부터는 특정 이벤트의 메시지를 처리하기 위한 ConsumerFactory와 ListenerContainerFactory를 생성합니다.
+     *
+     * @return 특정 이벤트 타입을 수신하는 컨슈머 설정 Map
+     */
 
     /* 회원가입 후 이벤트 리스너 */
     @Bean

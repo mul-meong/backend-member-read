@@ -1,4 +1,4 @@
-package com.mulmeong.member.read.member.kafka;
+package com.mulmeong.member.read.common.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -9,6 +9,16 @@ import java.util.Map;
 
 public class CommonJsonDeserializer {
 
+
+    /**
+     * Kafka 컨슈머 설정을 생성하는 메서드.(오류 처리와 메시지 역직렬화 설정 등)
+     * TRUSTED_PACKAGES는 보안을 위해 지정된 클래스만 역직렬화하도록 설정하며,
+     * Producer의 DTO 클래스 패키지와 같은 패키지를 지정해야 합니다.
+     *
+     * @param bootstrapServer Kafka 서버 주소 (쉼표로 구분된 리스트)
+     * @param groupId Kafka 컨슈머 그룹 ID
+     * @return Kafka 컨슈머 설정이 포함된 Map
+     */
     static Map<String, Object> getStringObjectMap(String bootstrapServer, String groupId) {
 
         return Map.of(
