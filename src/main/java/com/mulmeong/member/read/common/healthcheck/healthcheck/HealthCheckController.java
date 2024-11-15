@@ -1,4 +1,4 @@
-package com.mulmeong.member_read.common.healthcheck.healthcheck;
+package com.mulmeong.member.read.common.healthcheck.healthcheck;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
