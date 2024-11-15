@@ -1,7 +1,7 @@
 package com.mulmeong.member.read.common.config;
 
 import com.mulmeong.event.member.MemberCreateDto;
-import com.mulmeong.event.member.NicknameUpdateDto;
+import com.mulmeong.event.member.MemberNicknameUpdateDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,14 +56,14 @@ public class KafkaConsumerConfig {
 
     /* 닉네임 수정 후 이벤트 리스너 */
     @Bean
-    public ConsumerFactory<String, NicknameUpdateDto> nicknameUpdateDtoConsumerFactory() {
+    public ConsumerFactory<String, MemberNicknameUpdateDto> nicknameUpdateDtoConsumerFactory() {
 
         return new DefaultKafkaConsumerFactory<>(readConsumerConfigs());
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, NicknameUpdateDto> nicknameUpdateDtoListener() {
-        ConcurrentKafkaListenerContainerFactory<String, NicknameUpdateDto> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, MemberNicknameUpdateDto> nicknameUpdateDtoListener() {
+        ConcurrentKafkaListenerContainerFactory<String, MemberNicknameUpdateDto> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(nicknameUpdateDtoConsumerFactory());
         return factory;

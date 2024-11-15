@@ -1,7 +1,7 @@
 package com.mulmeong.member.read.member.application;
 
 import com.mulmeong.event.member.MemberCreateDto;
-import com.mulmeong.event.member.NicknameUpdateDto;
+import com.mulmeong.event.member.MemberNicknameUpdateDto;
 import com.mulmeong.member.read.member.document.Member;
 import com.mulmeong.member.read.member.infrastructure.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
      * @param dto 닉네임 수정 DTO
      */
     @Override
-    public void updateNickname(NicknameUpdateDto dto) {
+    public void updateNickname(MemberNicknameUpdateDto dto) {
         Query query = new Query(Criteria.where("memberUuid").is(dto.getMemberUuid()));
         Update update = new Update().set("nickname", dto.getNickname());
 

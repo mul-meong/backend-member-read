@@ -1,7 +1,7 @@
 package com.mulmeong.member.read.member.kafka;
 
 import com.mulmeong.event.member.MemberCreateDto;
-import com.mulmeong.event.member.NicknameUpdateDto;
+import com.mulmeong.event.member.MemberNicknameUpdateDto;
 import com.mulmeong.member.read.member.application.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class KafkaConsumer {
 
     @KafkaListener(topics = "nickname-updated", groupId = "member-read",
             containerFactory = "nicknameUpdateDtoListener")
-    public void handleNicknameUpdatedEvent(NicknameUpdateDto event) {
+    public void handleNicknameUpdatedEvent(MemberNicknameUpdateDto event) {
         log.info("NicknameUpdatedEvent Consume : {}", event);
         memberService.updateNickname(event);
     }

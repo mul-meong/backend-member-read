@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 @NoArgsConstructor
-public class NicknameUpdateDto {
+public class MemberNicknameUpdateDto {
     private String memberUuid;
     private String nickname;
-
 }
 
