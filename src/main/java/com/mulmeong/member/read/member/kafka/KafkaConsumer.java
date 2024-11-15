@@ -2,6 +2,7 @@ package com.mulmeong.member.read.member.kafka;
 
 import com.mulmeong.event.member.MemberCreateDto;
 import com.mulmeong.event.member.MemberNicknameUpdateDto;
+import com.mulmeong.event.member.MemberProfileImgUpdateDto;
 import com.mulmeong.member.read.member.application.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,5 +28,12 @@ public class KafkaConsumer {
     public void handleNicknameUpdatedEvent(MemberNicknameUpdateDto event) {
         log.info("NicknameUpdatedEvent Consume : {}", event);
         memberService.updateNickname(event);
+    }
+
+    @KafkaListener(topics = "profile-img-updated", groupId = "member-read",
+            containerFactory = "profileImgUpdateDtoListener")
+    public void handleProfileImgUpdatedEvent(MemberProfileImgUpdateDto event) {
+        log.info("ProfileImgUpdatedEvent Consume : {}", event);
+        memberService.updateProfileImage(event);
     }
 }

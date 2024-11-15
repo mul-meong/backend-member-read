@@ -2,6 +2,7 @@ package com.mulmeong.member.read.member.application;
 
 import com.mulmeong.event.member.MemberCreateDto;
 import com.mulmeong.event.member.MemberNicknameUpdateDto;
+import com.mulmeong.event.member.MemberProfileImgUpdateDto;
 import com.mulmeong.member.read.member.document.Member;
 import com.mulmeong.member.read.member.infrastructure.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,17 @@ public class MemberServiceImpl implements MemberService {
         Query query = new Query(Criteria.where("memberUuid").is(dto.getMemberUuid()));
         Update update = new Update().set("nickname", dto.getNickname());
 
-        mongoTemplate.updateFirst(query, update, Member.class); // 필요한 필드만 업데이트
+        mongoTemplate.updateFirst(query, update, Member.class);
+    }
+
+    /**
+     * 회원 Read DB의 프로필 이미지 수정.
+     * @param dto 프로필 이미지 수정 DTO
+     */
+    public void updateProfileImage(MemberProfileImgUpdateDto dto) {
+        Query query = new Query(Criteria.where("memberUuid").is(dto.getMemberUuid()));
+        Update update = new Update().set("profileImageUrl", dto.getProfileImgUrl());
+
+        mongoTemplate.updateFirst(query, update, Member.class);
     }
 }

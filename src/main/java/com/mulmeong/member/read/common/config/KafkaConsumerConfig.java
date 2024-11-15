@@ -2,6 +2,7 @@ package com.mulmeong.member.read.common.config;
 
 import com.mulmeong.event.member.MemberCreateDto;
 import com.mulmeong.event.member.MemberNicknameUpdateDto;
+import com.mulmeong.event.member.MemberProfileImgUpdateDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,7 +46,6 @@ public class KafkaConsumerConfig {
 
         return new DefaultKafkaConsumerFactory<>(readConsumerConfigs());
     }
-
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, MemberCreateDto> memberCreateDtoListener() {
         ConcurrentKafkaListenerContainerFactory<String, MemberCreateDto> factory =
@@ -60,12 +60,25 @@ public class KafkaConsumerConfig {
 
         return new DefaultKafkaConsumerFactory<>(readConsumerConfigs());
     }
-
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, MemberNicknameUpdateDto> nicknameUpdateDtoListener() {
         ConcurrentKafkaListenerContainerFactory<String, MemberNicknameUpdateDto> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(nicknameUpdateDtoConsumerFactory());
+        return factory;
+    }
+
+    /* 프로필사진 수정 후 이벤트 리스너 */
+    @Bean
+    public ConsumerFactory<String, MemberProfileImgUpdateDto> profileUpdateDtoConsumerFactory() {
+
+        return new DefaultKafkaConsumerFactory<>(readConsumerConfigs());
+    }
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, MemberProfileImgUpdateDto> profileUpdateDtoListener() {
+        ConcurrentKafkaListenerContainerFactory<String, MemberProfileImgUpdateDto> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(profileUpdateDtoConsumerFactory());
         return factory;
     }
 }
